@@ -1,0 +1,16 @@
+[ 2019-05-09 13:43:17 ]
+*** message *** :success
+{"type":1,"data":"Hello world\uff01123456"}
+[end]
+[ 2019-05-09 14:02:33 ]
+*** message *** :success
+{"type":1,"data":"Hello world\uff01654321"}
+[end]
+[ 2019-05-09 14:05:17 ]
+*** message *** :success
+{"type":1,"data":"Hello world\uff017654321"}
+[end]
+[ 2019-05-09 14:24:19 ]
+*** message *** :success
+{"type":1,"data":"Hello world\uff0187654321"}
+[end]

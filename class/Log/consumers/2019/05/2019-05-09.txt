@@ -1,0 +1,15 @@
+[ 2019-05-09 13:41:52 ]
+*** message *** :2019-05-09 13:41:52 [*] Waiting for message. To exit press CTRL+C 
+[end]
+[ 2019-05-09 13:53:17 ]
+*** message *** :2019-05-09 13:53:17Undefined URL
+[end]
+[ 2019-05-09 14:12:33 ]
+*** message *** :2019-05-09 14:12:33Undefined URL
+[end]
+[ 2019-05-09 14:15:17 ]
+*** message *** :2019-05-09 14:15:17Undefined URL
+[end]
+[ 2019-05-09 14:24:07 ]
+*** message *** :2019-05-09 14:24:07 [*] Waiting for message. To exit press CTRL+C 
+[end]
