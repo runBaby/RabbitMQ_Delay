@@ -7,5 +7,8 @@ RabbitMQ encapsulates delay queue, implements queue-based TTL and dead letter me
   RabbitMQ封装延时队列，基于队列的TTL和死信机制实现，超时处理；
 
 运行：
-1、自行下载安装PHP amqplib客户端库安装
+1、直接git clone
+
+2、自行下载安装PHP amqplib客户端库安装
+
 composer require php-amqplib/php-amqplib
