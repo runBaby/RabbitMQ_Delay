@@ -7,7 +7,7 @@ namespace DemoQueue\Consumers;
  * Time: 1:04 PM
  */
 date_default_timezone_set("Asia/Shanghai");
-require_once __DIR__.'/../vendor/autoload.php';
+require_once __DIR__.'/../../vendor/autoload.php';
 
 use PhpAmqpLib\Connection\AMQPStreamConnection;
 
@@ -37,7 +37,7 @@ class ConsumersClass
 
     public function __construct($rabbit_exchange,$rabbit_queue)
     {
-        self::$config = include_once __DIR__."/config.php";
+        self::$config = include_once __DIR__."/../Config/config.php";
 
         self::$config = self::$config['rabbitmq'];
         self::$rabbit_host = self::$config['host'];
@@ -86,7 +86,7 @@ class ConsumersClass
     public static function consumersClient()
     {
         //1、声明交换机
-        self::$channel->exchange_declare(self::$rabbit_exchange, self::EXCHANGE_MODEL,false,false,false);
+        self::$channel->exchange_declare(self::$rabbit_exchange, self::EXCHANGE_MODEL,false,true,false);
         //2、声明队列
         self::$channel->queue_declare(self::$rabbit_queue,false,true,false,false,false);
         //3、交换机和队列 绑定
@@ -120,7 +120,7 @@ class ConsumersClass
             $msg->delivery_info['channel']->basic_ack($msg->delivery_info['delivery_tag']);
         };
 
-        //只有consumer已经处理，并确认了上一条message时queue才分派新的message给它
+        //只有consumer已经处理，并确认了上一条message时queue才分派新的message给它(非公平分配，如果存在耗时操作，那么也一直等待。现在是空闲领取消息)
         self::$channel->basic_qos(null, 1, null);
         //第四个参数  是否自动回应 ack，false 手动回应
         self::$channel->basic_consume(self::$rabbit_queue,'',false,false,false,false,$callback);

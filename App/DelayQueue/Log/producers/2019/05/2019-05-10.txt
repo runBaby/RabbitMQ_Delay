@@ -1,0 +1,4 @@
+[ 2019-05-10 15:29:52 ]
+*** message *** :success
+{"type":1,"data":"Hello world\uff0187654321"}
+[end]

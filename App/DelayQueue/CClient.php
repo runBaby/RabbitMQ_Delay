@@ -9,8 +9,8 @@ namespace DemoQueue\Consumers;
 include_once __DIR__.'/ConsumersClass.php';
 
 
-$exchange = 'delay_exchange_test1';    //延迟交换机
-$queue = 'delay_queue_test1';          //延迟队列
+$exchange = 'delay_exchange_test2';    //延迟交换机
+$queue = 'delay_queue_test2';          //延迟队列
 
 $consumers = new ConsumersClass($exchange,$queue);
 
