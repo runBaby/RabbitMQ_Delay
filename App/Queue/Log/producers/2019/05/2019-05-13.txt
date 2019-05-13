@@ -1,0 +1,12 @@
+[ 2019-05-13 12:19:23 ]
+*** message *** :success
+{"type":1,"data":"Hello world!"}
+[end]
+[ 2019-05-13 12:21:53 ]
+*** message *** :success
+{"type":1,"data":"Hello world!"}
+[end]
+[ 2019-05-13 12:22:09 ]
+*** message *** :success
+{"type":1,"data":"Hello world!88888"}
+[end]
