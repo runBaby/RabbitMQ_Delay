@@ -7,7 +7,7 @@ namespace DemoQueue\Producer;
  * Time: 1:04 PM
  */
 date_default_timezone_set("Asia/Shanghai");
-require_once __DIR__.'/../vendor/autoload.php';
+require_once __DIR__.'/../../vendor/autoload.php';
 
 use PhpAmqpLib\Wire\AMQPTable;
 use PhpAmqpLib\Message\AMQPMessage;
@@ -38,16 +38,16 @@ class ProducerClass
 
    static protected $config;
 
-    const DELAY_EXCHANGE = 'delay_exchange_test1';        //延迟交换机
-    const CACHE_EXCHANGE = 'cache_echange_test1';         //缓存交换机
+    const DELAY_EXCHANGE = 'delay_exchange_test2';        //延迟交换机
+    const CACHE_EXCHANGE = 'cache_echange_test2';         //缓存交换机
     const EXCHANGE_MODEL = 'direct';                //交换机模式
 
-    const DELAY_QUEUE = 'delay_queue_test1';              //延迟队列
-    const CACHE_QUEUE = 'cache_queue_test1';            //缓存队列
+    const DELAY_QUEUE = 'delay_queue_test2';              //延迟队列
+    const CACHE_QUEUE = 'cache_queue_test2';            //缓存队列
 
     public function __construct()
     {
-        self::$config = include_once __DIR__."/config.php";
+        self::$config = include_once __DIR__."/../Config/config.php";
 
         self::$config = self::$config['rabbitmq'];
         self::$rabbit_host = self::$config['host'];
@@ -87,8 +87,8 @@ class ProducerClass
         // TODO: Implement producers() method.
 
         //1、声明 交换机
-        self::$channel->exchange_declare(self::DELAY_EXCHANGE, self::EXCHANGE_MODEL, false, false, false);
-        self::$channel->exchange_declare(self::CACHE_EXCHANGE, self::EXCHANGE_MODEL, false, false, false);
+        self::$channel->exchange_declare(self::DELAY_EXCHANGE, self::EXCHANGE_MODEL, false, true, false);
+        self::$channel->exchange_declare(self::CACHE_EXCHANGE, self::EXCHANGE_MODEL, false, true, false);
 
         //2、设置 死信
         $table = new AMQPTable();
@@ -96,7 +96,7 @@ class ProducerClass
         $table->set('x-dead-letter-routing-key', self::$delay_routing);    //参数 死信之后路由
         $table->set('x-message-ttl', self::$life_time);                    //参数 消息失效时间
 
-        //3、（缓存）队列绑定 交换机               第三个参数 true  是否持久（RabbitMQ 持久化 步骤一）
+        //3、（缓存）队列绑定 交换机               第三个参数 true  是否持久（RabbitMQ 持久化 步骤一：元数据）
         self::$channel->queue_declare(self::CACHE_QUEUE, false, true, false, false, false, $table);
         self::$channel->queue_bind(self::CACHE_QUEUE, self::CACHE_EXCHANGE, self::$cache_routing);
 
@@ -105,7 +105,7 @@ class ProducerClass
         self::$channel->queue_bind(self::DELAY_QUEUE, self::DELAY_EXCHANGE, self::$delay_routing);
 
         $msg = new AMQPMessage(json_encode($send_info), array(
-            //参数 发送消息的时候将消息的 deliveryMode 设置为 2 （RabbitMQ 持久化 步骤二）
+            //参数 发送消息的时候将消息的 deliveryMode 设置为 2 （RabbitMQ 持久化 步骤二：消息）
             'delivery_mode' => AMQPMessage::DELIVERY_MODE_PERSISTENT
         ));
         //5、推送 消息到队列
