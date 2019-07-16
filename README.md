@@ -31,6 +31,14 @@ RabbitMQ encapsulates delay queue, implements queue-based TTL and dead letter me
      composer require php-amqplib/php-amqplib
 
 
+概念：
+   死信机制：
+    
+       1、消息被拒绝，并且设置 requeue 参数为 false；
+       2、消息过期
+       3、队列达到最大长度 ：对队列中消息的条数进行限制  x-max-length、对队列中消息的总量进行限制  x-max-length-bytes
+
+
 交流：
 
     QQ    ：1364655420 
